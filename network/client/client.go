@@ -37,3 +37,21 @@ func (c *Client) Connect() int {
 func (c *Client) Close() {
 	c.conn.Close()
 }
+
+func (c *Client) Send(buffer []byte) (int, error) {
+	n, err := c.conn.Write(buffer)
+	if err != nil {
+		log.Println(err)
+		return 0, err
+	}
+	return n, nil
+}
+
+func (c *Client) Recv(buffer []byte) (int, error) {
+	n, err := c.conn.Read(buffer)
+	if err != nil {
+		log.Println(err)
+		return 0, err
+	}
+	return n, nil
+}
