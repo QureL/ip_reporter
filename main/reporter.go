@@ -18,5 +18,8 @@ func main() {
 		return
 	}
 	r := reporter.NewReporter(os.Args[1], port)
-	r.Run(10)
+	for {
+		/* 半小时上报周期 */
+		r.Run(60 * 30)
+	}
 }

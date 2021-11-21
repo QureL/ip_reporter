@@ -29,7 +29,9 @@ func (r *Reporter) Run(cycle int) {
 	defer r.client.Close()
 
 	for {
-		r.client.Send([]byte("hello"))
+		if n, _ := r.client.Send([]byte("hello")); n == 0 {
+			return
+		}
 		time.Sleep(time.Second * time.Duration(cycle))
 	}
 
